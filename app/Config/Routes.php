@@ -11,3 +11,5 @@ $routes->get('quienes_somos', 'Home::quienes_somos');
 $routes->get('comercializacion', 'Home::comercializacion');
 $routes->get('informacion_de_contactos', 'Home::informacion_de_contactos');
 $routes->get('terminos_y_usos', 'Home::terminos_y_usos');
+$routes->get('login', 'Home::login');
+$routes->get('registrate', 'Home::registrate');

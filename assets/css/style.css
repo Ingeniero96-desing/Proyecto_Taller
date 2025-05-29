@@ -37,13 +37,6 @@
     filter: brightness(0) invert(1);
 }
 
-/* .btn-outline-success {
-    background-color: rgb(15, 15, 15);
-    color: white;
-    border: 2px solid rgb(12, 12, 12);
-    transition: all 0.3s ease;
-} */
-
 .mi-navbar {
     background-color: rgba(0, 91, 228, 0.88);
 }
@@ -778,4 +771,123 @@ footer {
 
 .btn-primary {
     margin-top: auto;
+}
+
+/* BOTONES DE REGISTRARSE */
+.custom-btn {
+    background: linear-gradient(to right, #007bff, #1E66EA);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.custom-btn:hover {
+    background: linear-gradient(to right, #0056b3, #154cba);
+}
+
+.custom-btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.custom-btn-secondary:hover {
+    background-color: white;
+    color: #1E66EA;
+}
+
+/* LOGIN */
+.fondo-principal {
+    background-image: url(assets/img/herramientas.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.login-container:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.boton-inicio-sesion {
+    background-color: rgba(0, 91, 228, 0.88) !important;
+    border: 0.5rem !important;
+}
+
+.login-links {
+    color: rgba(0, 91, 228, 0.88) !important;
+}
+
+/* REGISTRARSE */
+.registrarme-fondo {
+    background-image: url(assets/img/herramientas.jpg) !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.registrarme-titulos {
+    text-align: center;
+}
+
+.registrarme-titulos h3 {
+    font-size: 1rem;
+}
+
+.nombre-ape {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-nombre-ape {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.input-nombre-ape:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.inputs {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.inputs:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.iconos {
+    background-color: rgba(0, 91, 228, 0.88);
+}
+
+.R-links {
+    color: rgba(0, 91, 228, 0.88) !important;
+}
+
+.boton-crear {
+    background-color: rgba(0, 91, 228, 0.88) !important;
+    border: 0.5rem !important;
 }

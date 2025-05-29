@@ -43,4 +43,16 @@ class Home extends BaseController
             . view('/Contenidos/terminos_y_usos')
             . view('/Plantillas/footer_view');
     }
+
+    public function login()
+    {
+        return view('/Plantillas/header_view')
+            . view('/Contenidos/login');
+    }
+
+    public function registrate()
+    {
+        return view('/Plantillas/header_view')
+            . view('/Contenidos/registrate');
+    }
 }
