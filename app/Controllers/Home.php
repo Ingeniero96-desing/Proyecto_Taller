@@ -55,4 +55,10 @@ class Home extends BaseController
         return view('/Plantillas/header_view')
             . view('/Contenidos/registrate');
     }
+
+    public function panelAdmin()
+    {
+        return view('Plantillas/header_view')
+            . view('Admin/panelAdmin');
+    }
 }

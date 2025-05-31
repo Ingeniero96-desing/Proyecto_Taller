@@ -13,7 +13,7 @@ class Usuarios_controller extends BaseController
 
         return view('Plantillas/header_view')
             . view('Plantillas/nav_view')
-            . view('Admin/lista_usuarios', $data);
+            . view('Admin/Usuarios/lista_usuarios', $data);
     }
 
     public function crear_usuario() {
@@ -22,7 +22,7 @@ class Usuarios_controller extends BaseController
 
         return view('Plantillas/header_view')
             . view('Plantillas/nav_view')
-            . view('Admin/crear_usuario', $data);
+            . view('Admin/Usuarios/crear_usuario', $data);
     }
 
     public function guardar_usuario() {
@@ -33,10 +33,10 @@ class Usuarios_controller extends BaseController
             'nombre' => 'required|max_length[30]',
             'apellido' => 'required|max_length[30]',
             'email' => 'required|max_length[20]',
-            'usuario' => 'required|max_length[20]',
+            'telefono' => 'required|integer',
             'pass' => 'required|max_length[50]',
             'baja' => 'required|max_length[2]',
-            'id_perfil' => 'required|integer'
+            'id_perfil' => 'required|integer',
         ]);
 
 
@@ -49,7 +49,7 @@ class Usuarios_controller extends BaseController
             'nombre' => $request->getPost('nombre'),
             'apellido' => $request->getPost('apellido'),
             'email' => $request->getPost('email'),
-            'usuario' => $request->getPost('usuario'),
+            'telefono' => $request->getPost('telefono'),
             'pass' => password_hash($request->getPost('pass'), PASSWORD_BCRYPT),
             'id_perfil' => $request->getPost('id_perfil'),
             'baja' => $request->getPost('baja')
@@ -68,7 +68,7 @@ class Usuarios_controller extends BaseController
 
         return view('Plantillas/header_view')
             . view('Plantillas/nav_view')
-            . view('Admin/editar_usuario', $data);
+            . view('Admin/Usuarios/editar_usuario', $data);
     }
 
     public function actualizar_usuario($id) {
@@ -79,7 +79,7 @@ class Usuarios_controller extends BaseController
             'nombre' => $request->getPost('nombre'),
             'apellido' => $request->getPost('apellido'),
             'email' => $request->getPost('email'),
-            'usuario' => $request->getPost('usuario'),
+            'telefono' => $request->getPost('telefono'),
             'id_perfil' => $request->getPost('id_perfil'),
             'baja' => $request->getPost('baja')
         ];
