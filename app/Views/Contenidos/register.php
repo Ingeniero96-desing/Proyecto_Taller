@@ -51,7 +51,7 @@
 
             </form>
             <div class="text-center">
-                <a href="#" class="text-decoration-none text-info fw-semibold R-links">¿Ya tienes una cuenta?</a>
+                <a href="<?= base_url('login') ?>" class="text-decoration-none text-info fw-semibold R-links">¿Ya tienes una cuenta?</a>
             </div>
 
         </div>

@@ -10,7 +10,7 @@ class Register_controller extends BaseController
     public function mostrar_formulario()
     {
         return view('Plantillas/header_view')
-            . view('Views/Contenidos/registrate');
+            . view('Views/Contenidos/register');
     }
 
     public function registrar()
@@ -24,8 +24,33 @@ class Register_controller extends BaseController
             'email' => 'required|valid_email|max_length[50]|is_unique[usuarios.email]',
             'telefono' => 'required|integer',
             'pass' => 'required|min_length[6]|max_length[50]',
+        ], 
+        [
+            'nombre' => [
+                'required'   => 'El nombre es obligatorio.',
+                'max_length' => 'El nombre no puede superar los 30 caracteres.',
+            ],
+            'apellido' => [
+                'required'   => 'El apellido es obligatorio.',
+                'max_length' => 'El apellido no puede superar los 30 caracteres.',
+            ],
+            'email' => [
+                'required'   => 'El correo electrónico es obligatorio.',
+                'valid_email'=> 'Debes ingresar un correo electrónico válido.',
+                'max_length' => 'El correo electrónico no puede superar los 50 caracteres.',
+                'is_unique'  => 'Este correo ya está registrado.',
+            ],
+            'telefono' => [
+                'required' => 'El número de teléfono es obligatorio.',
+                'integer'  => 'El número de teléfono debe contener solo números.',
+            ],
+            'pass' => [
+                'required'   => 'La contraseña es obligatoria.',
+                'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
+                'max_length' => 'La contraseña no puede superar los 50 caracteres.',
+            ],
         ]);
-
+        
         if (!$validation->withRequest($request)->run()) {
             return redirect()->back()->withInput()->with('validation', $validation->getErrors());
         }

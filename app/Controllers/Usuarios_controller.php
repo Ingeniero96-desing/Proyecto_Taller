@@ -29,14 +29,47 @@ class Usuarios_controller extends BaseController
         $validation = \Config\Services::validation();
         $request = $this->request;
 
-        $validation->setRules([
+       $validation->setRules([
             'nombre' => 'required|max_length[30]',
             'apellido' => 'required|max_length[30]',
-            'email' => 'required|max_length[20]',
-            'telefono' => 'required|integer',
-            'pass' => 'required|max_length[50]',
+            'email' => 'required|valid_email|max_length[20]|is_unique[usuarios.email]',
+            'telefono' => 'required|integer',                
+            'pass' => 'required|max_length[50]|min_length[6]',
             'baja' => 'required|max_length[2]',
             'id_perfil' => 'required|integer',
+        ],
+        [   // Mensajes personalizados de validación
+            'nombre' => [
+            'required' => 'Nombre requerido',
+            'max_length' => 'Máximo 30 caracteres',
+            ],
+            'apellido' => [
+                'required' => 'Apellido requerido',
+                'max_length' => 'Máximo 30 caracteres',
+            ],
+            'email' => [
+                'required' => 'El correo electrónico es obligatorio.',
+                'valid_email' => 'La dirección de correo debe ser válida.',
+                'max_length' => 'Máximo 20 caracteres.',
+                'is_unique' => 'El email ya está registrado.',
+            ],
+            'telefono' => [
+                'required' => 'El teléfono es obligatorio.',
+                'integer'  => 'El número de teléfono debe contener solo números.'
+            ],
+            'pass' => [
+                'required' => 'La contraseña es obligatoria.',
+                'max_length' => 'Máximo 50 caracteres.',
+                'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
+            ],
+            'baja' => [
+                'required' => 'El campo "baja" es obligatorio.',
+                'max_length' => 'El valor de "baja" no puede exceder los 2 caracteres.',
+            ],
+            'id_perfil' => [
+                'required' => 'Debe seleccionar un perfil.',
+                'integer' => 'El perfil debe ser un número válido.',
+            ],
         ]);
 
 
@@ -50,7 +83,7 @@ class Usuarios_controller extends BaseController
             'apellido' => $request->getPost('apellido'),
             'email' => $request->getPost('email'),
             'telefono' => $request->getPost('telefono'),
-            'pass' => password_hash($request->getPost('pass'), PASSWORD_BCRYPT),
+            'pass' => password_hash($request->getPost('pass'), PASSWORD_DEFAULT),
             'id_perfil' => $request->getPost('id_perfil'),
             'baja' => $request->getPost('baja')
         ]);
@@ -72,25 +105,48 @@ class Usuarios_controller extends BaseController
     }
 
     public function actualizar_usuario($id) {
-        $request = $this->request;
-        $model = new usuarios_model();
+    $request = $this->request;
+    $model = new usuarios_model();
+    $usuario_actual = $model->find($id);
 
-        $data = [
-            'nombre' => $request->getPost('nombre'),
-            'apellido' => $request->getPost('apellido'),
-            'email' => $request->getPost('email'),
-            'telefono' => $request->getPost('telefono'),
-            'id_perfil' => $request->getPost('id_perfil'),
-            'baja' => $request->getPost('baja')
-        ];
+    $rules = [
+        'nombre' => 'required|max_length[30]',
+        'apellido' => 'required|max_length[30]',
+        'telefono' => 'required|integer',
+        'id_perfil' => 'required|integer',
+        'baja' => 'required|max_length[2]'
+    ];
 
-        if (!empty($request->getPost('pass'))) {
-            $data['pass'] = password_hash($request->getPost('pass'), PASSWORD_BCRYPT);
-        }
+    if ($request->getPost('email') !== $usuario_actual['email']) {
+        $rules['email'] = 'required|valid_email|max_length[20]|is_unique[usuarios.email]';
+    } else {
+        $rules['email'] = 'required|valid_email|max_length[20]';
+    }
 
-        $model->update($id, $data);
+    if (!empty($request->getPost('pass'))) {
+        $rules['pass'] = 'max_length[50]|min_length[6]';
+    }
 
-        return redirect()->to('/usuarios')->with('mensaje', 'Usuario actualizado correctamente');
+    if (!$this->validate($rules)) {
+        return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
+    }
+
+    $data = [
+        'nombre' => $request->getPost('nombre'),
+        'apellido' => $request->getPost('apellido'),
+        'email' => $request->getPost('email'),
+        'telefono' => $request->getPost('telefono'),
+        'id_perfil' => $request->getPost('id_perfil'),
+        'baja' => $request->getPost('baja')
+    ];
+
+    if (!empty($request->getPost('pass'))) {
+        $data['pass'] = password_hash($request->getPost('pass'), PASSWORD_BCRYPT);
+    }
+
+    $model->update($id, $data);
+
+    return redirect()->to('/usuarios')->with('mensaje', 'Usuario actualizado correctamente');
     }
 
     public function eliminar_usuario($id) {
