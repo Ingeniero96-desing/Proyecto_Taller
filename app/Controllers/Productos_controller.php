@@ -102,7 +102,7 @@ class Productos_controller extends BaseController
             'precio_producto' => $request->getPost('precio_producto'),
             'stock_producto' => $request->getPost('stock_producto'),
             'id_categoria' => $request->getPost('id_categoria'),
-            'imagen_categoria' => $request->getPost('imagen_categoria'),
+            'imagen_producto' => $request->getPost('imagen_producto'),
         ]);
 
         return redirect()->to('/productos')->with('mensaje', 'Producto actualizado correctamente');

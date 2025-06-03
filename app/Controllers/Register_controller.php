@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\usuarios_model;
-// use App\Models\perfiles_model;
 
 class Register_controller extends BaseController
 {
@@ -52,8 +51,12 @@ class Register_controller extends BaseController
         ]);
         
         if (!$validation->withRequest($request)->run()) {
-            return redirect()->back()->withInput()->with('validation', $validation->getErrors());
+            
+            $data ['validation'] = $validation->getErrors();
+            return view('Plantillas/header_view', $data).view('Views/Contenidos/register');
+
         }
+         
 
         $model = new usuarios_model();
 

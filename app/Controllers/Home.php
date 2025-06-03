@@ -58,7 +58,11 @@ class Home extends BaseController
 
     public function panelAdmin()
     {
+         if (session()->get('id_perfil') != 1) {
+            return redirect()->to(base_url('login'));
+    }
+
         return view('Plantillas/header_view')
-            . view('Admin/panelAdmin');
+            . view('/Admin/panelAdmin');
     }
 }

@@ -2,18 +2,20 @@
     <div class="bg-white p-5 rounded-5 text-secondary shadow login-container" style="width: 25rem;">
 
          
-        <?php if (session('validation')): ?>
+        <?php if (!empty($validation)): ?>
             <div class="alert alert-danger">
                 <ul>
-                    <?php foreach (session('validation') as $error): ?>
+                    <?php foreach ($validation as $error): ?>
                         <li><?= esc($error) ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
-
+        <?php if(session('error')){
+            echo session('error');
+        } ?>
                            
-        <form action="<?= base_url('login') ?>" method="post">
+        <form action="<?= base_url('loguear') ?>" method="post">
 
             <!-- Icono de login centrado -->
             <div class="d-flex justify-content-center">
@@ -33,7 +35,7 @@
                     type="email"
                     name="email"
                     placeholder="Correo electrónico"
-                    required
+                    
                 >
             </div>
             <?php if (session()->getFlashdata('validation')['email'] ?? false): ?>
@@ -52,7 +54,7 @@
                     type="password"
                     name="pass"
                     placeholder="Contraseña"
-                    required
+                    
                 >
             </div>
             <?php if (session()->getFlashdata('validation')['pass'] ?? false): ?>

@@ -12,10 +12,12 @@ $routes->get('comercializacion', 'Home::comercializacion');
 $routes->get('informacion_de_contactos', 'Home::informacion_de_contactos');
 $routes->get('terminos_y_usos', 'Home::terminos_y_usos');
 
-$routes->get('login', 'Login_controller::mostrar_login');
-$routes->post('login', 'Login_controller::autenticar');
-
 $routes->get('registrate', 'Register_controller::mostrar_formulario');
 $routes->post('registrate', 'Register_controller::registrar');
+
+$routes->get('login', 'Login_controller::mostrar_login');
+$routes->post('loguear', 'Login_controller::loguear');
+$routes->get('logout', 'Login_controller::logout');
+
 
 $routes->get('panelAdmin', 'Home::panelAdmin');

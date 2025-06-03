@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\usuarios_model;
+use App\Models\Usuarios_model;
 
 class Login_controller extends BaseController
 {
@@ -11,68 +11,88 @@ class Login_controller extends BaseController
     {
 
         return view('Plantillas/header_view')
-            . view('Views/Contenidos/login');
+            . view('Views/Contenidos/login')
+            . view('Plantillas/footer_view');
     }
 
-    public function autenticar()
+    public function loguear()
     {
-        //AGREGUÉ
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            dd('NO está llegando por POST', $_SERVER);
-        }
 
         $request = \Config\Services::request();
-        $session = session();
-
         $validation = \Config\Services::validation();
+        // Asegurarse de que la solicitud sea POST
+        if (!$this->request->is('post')) {
+    
+            return redirect()->to('/login')->with('error', 'Método no permitido.');
+        }
+      
+
+        // Obtener los datos del formulario
+        $email = $this->request->getPost('email');
+        $pass = $this->request->getPost('pass');
+
+        // Validación
+       
         $validation->setRules([
-            'email' => 'required|valid_email',
+            'email' => 'required|valid_email|max_length[30]',
             'pass'  => 'required|min_length[6]',
-        ],
-        [     //AGREGUÉ
+        ], [
             'email' => [
-            'required'    => 'El correo electrónico es obligatorio.',
-            'valid_email' => 'Debes ingresar un correo electrónico válido.',
-            'max_length'  => 'El correo no debe superar los 30 caracteres.',
+                'required'    => 'El correo electrónico es obligatorio.',
+                'valid_email' => 'Debes ingresar un correo electrónico válido.',
+                'max_length'  => 'El correo no debe superar los 30 caracteres.',
             ],
             'pass' => [
-            'required'   => 'La contraseña es obligatoria.',
-            'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
+                'required'   => 'La contraseña es obligatoria.',
+                'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
             ]
         ]);
-
+         
         if (!$validation->withRequest($request)->run()) {
-            dd('Falló la validación', $validation->getErrors()); //AGREGUÉ PARA Q APAREZCA UN MENSAJE SI NO AGARRA 
-            return redirect()->back()->withInput()->with('validation', $validation->getErrors());
+            
+            $data ['validation'] = $validation->getErrors();
+            return view('Plantillas/header_view', $data).view('Views/Contenidos/login');
+
+            
+        }
+         
+        // Verificación de credenciales en la base de datos
+        $userModel = new Usuarios_model();
+        $usuario = $userModel->where('email', $email)->first();
+
+        if (!$usuario || !password_verify($pass, $usuario['pass'])) {
+            return redirect()->route('login')->with('error', 'Credenciales incorrectas.');
         }
 
-        $userModel = new usuarios_model();
-        $user = $userModel->where('email', $request->getPost('email'))->first();
+        // Crear sesión
+        $session = session();
+        $session->set([
+            'id'       => $usuario['id'],
+            'nombre'   => $usuario['nombre'],
+            'email'    => $usuario['email'],
+            'id_perfil' => $usuario['id_perfil'],
+            'logueado' => true,
+        ]);
 
-        if ($user && password_verify($request->getPost('pass'), $user['pass'])) {
-            dd('Login exitoso', $user); //AGREGUÉ PARA Q APAREZCA UN MENSAJE SI AGARRA 
-            $session->set([
-                'nombre_usuario'   => $user['nombre'],
-                'apellido_usuario' => $user['apellido'],
-                'id_perfil'           => $user['id_perfil'],
-                'isLogged'            => true,
-            ]);
-
-            return $user['id_perfil'] == 1
-                ? redirect()->route('panelAdmin')
-                : redirect()->route('principal');
+        // Redireccionar según rol
+        if ($usuario['id_perfil'] == 1) {
+            return view('Plantillas/header_view')
+                . view('Plantillas/nav_admin')
+                . view('Admin/panelAdmin');
+        } else {
+            return view('Plantillas/header_view')
+                . view('Plantillas/nav_cliente')
+                . view('Contenidos/principal')
+                . view('Plantillas/footer_view');
         }
-            return redirect()->back()->with('error', 'Email o Contraseña incorrectos');
-        
     }
 
     // Cierra la sesion del usuario
     public function logout()
     {
-
         $session = session();
         $session->destroy(); //Elimina todos los datos de la sesion
 
-        return redirect()->to('/login'); //vuelve al login
+        return redirect()->to('/login'); 
     }
 }

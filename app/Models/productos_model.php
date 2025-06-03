@@ -15,7 +15,7 @@ class productos_model extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = 'false';
 
-    protected $allowedFields = ['nombre_producto', 'descripcion_producto', 'precio_producto', 'stock_producto', 'id_categoria', 'imagen_categoria'];
+    protected $allowedFields = ['nombre_producto', 'descripcion_producto', 'precio_producto', 'stock_producto', 'id_categoria', 'imagen_producto'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
