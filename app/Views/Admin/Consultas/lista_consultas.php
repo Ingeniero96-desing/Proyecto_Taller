@@ -1,45 +1,72 @@
-<div class="container mt-5">
-    <h2>Lista de Consultas</h2>
+<div class="container mt-4">
+    <h2 class="mb-4 border-bottom seccion-titulo">
+    <i class="bi bi-chat-left-text me-2"></i>Lista de Consultas
+    </h2>
+
 
     <?php if (session()->getFlashdata('mensaje')): ?>
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= session()->getFlashdata('mensaje') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
         </div>
     <?php endif; ?>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Asunto</th>
-                <th>Mensaje</th>
-                <th>Usuario</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($consultas)): ?>
-                <?php foreach ($consultas as $consulta): ?>
+    <!-- 🔍 Buscador -->
+    <div class="mb-3">
+        <input type="text" id="buscador" class="form-control" placeholder="Buscar">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover" id="tabla-consultas">
+            <thead class="table-primary">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Asunto</th>
+                    <th>Mensaje</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($consultas)): ?>
+                    <?php foreach ($consultas as $consulta): ?>
+                        <tr>
+                            <td><?= esc($consulta['nombre_mensaje']) ?></td>
+                            <td><?= esc($consulta['correo_mensaje']) ?></td>
+                            <td><?= esc($consulta['asunto_mensaje']) ?></td>
+                            <td style="max-width: 250px; word-wrap: break-word; white-space: normal;">
+                                <?= esc($consulta['consulta_mensaje']) ?>
+                            </td>
+                            <td><?= esc($consulta['nombre']) . ' ' . esc($consulta['apellido']) ?></td>
+                            <td>
+                                <div class="d-flex gap-2">
+
+                                    <a href="<?= base_url('consultas/eliminar/' . $consulta['id_mensaje']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta consulta?')">Eliminar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+
+                <?php else: ?>
                     <tr>
-                        <td><?= esc($consulta['nombre_mensaje']) ?></td>
-                        <td><?= esc($consulta['correo_mensaje']) ?></td>
-                        <td><?= esc($consulta['asunto_mensaje']) ?></td>
-                        <td><?= esc($consulta['consulta_mensaje']) ?></td>
-                        <td><?= esc($consulta['nombre']) . ' ' . esc($consulta['apellido']) ?></td>
-                        <td>
-                            <a href="<?= base_url('consultas/editar/' . $consulta['id_mensaje']) ?>" class="btn btn-sm btn-warning">Editar</a>
-                            
-                            <form action="<?= base_url('consultas/eliminar/' . $consulta['id_mensaje']) ?>" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta consulta?');">
-                                <?= csrf_field() ?>
-                                <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                            </form>
-                        </td>
+                        <td colspan="6" class="text-muted text-center">No hay consultas registradas.</td>
                     </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr><td colspan="6">No hay consultas registradas.</td></tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<!-- 🔧 Script para buscador en tiempo real -->
+<script>
+    document.getElementById("buscador").addEventListener("keyup", function() {
+        const filtro = this.value.toLowerCase();
+        const filas = document.querySelectorAll("#tabla-consultas tbody tr");
+
+        filas.forEach(fila => {
+            const texto = fila.innerText.toLowerCase();
+            fila.style.display = texto.includes(filtro) ? "" : "none";
+        });
+    });
+</script>

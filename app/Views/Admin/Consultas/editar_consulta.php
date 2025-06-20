@@ -1,17 +1,13 @@
 <div class="container mt-5">
-    <h2><?= esc($titulo) ?></h2>
 
-    <?php if (isset($validation)): ?>
-        <div class="alert alert-danger">
-            <ul>
-                <?php foreach ($validation as $error): ?>
-                    <li><?= esc($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+   <?php if (isset($validation)): ?>
+    <div class="alert alert-danger">
+        <?= $validation->listErrors() ?>
+    </div>
     <?php endif; ?>
 
-    <form action="<?= base_url('Admin/editar_consulta/' . $consultas['id_mensaje']) ?>" method="post">
+    <form action="<?= base_url('consultas/editar/' . $consultas['id_mensaje']) ?>" method="post">
+        <?= csrf_field() ?>
         <div class="form-group">
             <label for="nombre_mensaje">Nombre</label>
             <input type="text" name="nombre_mensaje" class="form-control" value="<?= esc($consultas['nombre_mensaje']) ?>">
@@ -33,6 +29,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
-        <a href="<?= base_url('/admin/consultas') ?>" class="btn btn-secondary mt-3">Cancelar</a>
+
+        <a href="<?= base_url('consultas') ?>" class="btn btn-secondary mt-3">Cancelar</a>
     </form>
 </div>

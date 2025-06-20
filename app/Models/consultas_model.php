@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use CondeIgniter\Model;
+use CodeIgniter\Model;
 
 class consultas_model extends Model
 {
@@ -13,9 +13,9 @@ class consultas_model extends Model
     protected $useAutoIncrement = true;
 
     protected $returnType = 'array';
-    protected $useSoftDeletes = 'false';
+    protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'correo', 'asunto', 'consulta', 'id_usuarios'];
+    protected $allowedFields = ['nombre_mensaje', 'correo_mensaje', 'asunto_mensaje', 'consulta_mensaje', 'id_usuarios'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

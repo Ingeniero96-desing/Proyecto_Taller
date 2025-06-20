@@ -17,6 +17,6 @@ class Usuarios_model extends Model
 
     protected $allowedFields = ['nombre', 'apellido', 'email', 'telefono', 'pass', 'baja', 'id_perfil'];
 
-    protected bool $allowEmptyInserts = false; // esto impide que se inserten registros vacios.
-    protected bool $updateOnlyChanged = true; // esto permite que solo se actualicen los campos que realmente hayan cambiado.
+    protected bool $allowEmptyInserts = false; // impide que se inserten registros vacios.
+    protected bool $updateOnlyChanged = true; // permite que solo se actualicen los campos que realmente hayan cambiado.
 }

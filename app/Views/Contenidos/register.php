@@ -1,9 +1,11 @@
     <div class="d-flex justify-content-center align-items-center vh-100 registrarme-fondo">
         <div class="bg-white p-5 rounded-5 text-secondary shadow">
-            <div class="registrarme-titulos">
+            <div class="registrarme-titulos text-center">
+                <i class="bi bi-person-circle fs-1 text-primary mb-3"></i>
                 <h1>Creá una cuenta</h1>
                 <h3>Es fácil y rápido.</h3>
             </div>
+
             <?php if (session()->getFlashdata('mensaje')): ?>
                 <div class="alert alert-danger">
                     <?= session()->getFlashdata('mensaje') ?>

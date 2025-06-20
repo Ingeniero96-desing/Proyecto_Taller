@@ -2,21 +2,27 @@
 
 namespace App\Controllers;
 
-use App\Models\usuarios_model;
+use App\Models\Usuarios_model;
 use App\Models\perfiles_model;
 
 class Usuarios_controller extends BaseController
 {
-    public function lista_usuarios() {
-        $usuarios_model = new usuarios_model();
-        $data['usuarios'] = $usuarios_model->findAll();
+    public function lista_usuarios()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('usuarios');
+        $builder->select('usuarios.*, perfiles.descripcion as perfil');
+        $builder->join('perfiles', 'perfiles.id_perfiles = usuarios.id_perfil');
+        $query = $builder->get();
+        $data['usuarios'] = $query->getResultArray();
 
         return view('Plantillas/header_view')
             . view('Plantillas/nav_view')
             . view('Admin/Usuarios/lista_usuarios', $data);
     }
 
-    public function crear_usuario() {
+    public function crear_usuario()
+    {
         $perfiles_model = new perfiles_model();
         $data['perfiles'] = $perfiles_model->findAll();
 
@@ -25,59 +31,62 @@ class Usuarios_controller extends BaseController
             . view('Admin/Usuarios/crear_usuario', $data);
     }
 
-    public function guardar_usuario() {
+    public function guardar_usuario()
+    {
         $validation = \Config\Services::validation();
         $request = $this->request;
 
-       $validation->setRules([
-            'nombre' => 'required|max_length[30]',
-            'apellido' => 'required|max_length[30]',
-            'email' => 'required|valid_email|max_length[20]|is_unique[usuarios.email]',
-            'telefono' => 'required|integer',                
-            'pass' => 'required|max_length[50]|min_length[6]',
-            'baja' => 'required|max_length[2]',
-            'id_perfil' => 'required|integer',
-        ],
-        [   // Mensajes personalizados de validación
-            'nombre' => [
-            'required' => 'Nombre requerido',
-            'max_length' => 'Máximo 30 caracteres',
+        $validation->setRules(
+            [
+                'nombre' => 'required|max_length[30]',
+                'apellido' => 'required|max_length[30]',
+                'email' => 'required|valid_email|max_length[20]|is_unique[usuarios.email]',
+                'telefono' => 'required|integer',
+                'pass' => 'required|max_length[50]|min_length[6]',
+                'baja' => 'required|integer',
+                'id_perfil' => 'required|integer',
             ],
-            'apellido' => [
-                'required' => 'Apellido requerido',
-                'max_length' => 'Máximo 30 caracteres',
-            ],
-            'email' => [
-                'required' => 'El correo electrónico es obligatorio.',
-                'valid_email' => 'La dirección de correo debe ser válida.',
-                'max_length' => 'Máximo 20 caracteres.',
-                'is_unique' => 'El email ya está registrado.',
-            ],
-            'telefono' => [
-                'required' => 'El teléfono es obligatorio.',
-                'integer'  => 'El número de teléfono debe contener solo números.'
-            ],
-            'pass' => [
-                'required' => 'La contraseña es obligatoria.',
-                'max_length' => 'Máximo 50 caracteres.',
-                'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
-            ],
-            'baja' => [
-                'required' => 'El campo "baja" es obligatorio.',
-                'max_length' => 'El valor de "baja" no puede exceder los 2 caracteres.',
-            ],
-            'id_perfil' => [
-                'required' => 'Debe seleccionar un perfil.',
-                'integer' => 'El perfil debe ser un número válido.',
-            ],
-        ]);
+            [   // Mensajes personalizados de validación
+                'nombre' => [
+                    'required' => 'Nombre requerido',
+                    'max_length' => 'Máximo 30 caracteres',
+                ],
+                'apellido' => [
+                    'required' => 'Apellido requerido',
+                    'max_length' => 'Máximo 30 caracteres',
+                ],
+                'email' => [
+                    'required' => 'El correo electrónico es obligatorio.',
+                    'valid_email' => 'La dirección de correo debe ser válida.',
+                    'max_length' => 'Máximo 20 caracteres.',
+                    'is_unique' => 'El email ya está registrado.',
+                ],
+                'telefono' => [
+                    'required' => 'El teléfono es obligatorio.',
+                    'integer'  => 'El número de teléfono debe contener solo números.'
+                ],
+                'pass' => [
+                    'required' => 'La contraseña es obligatoria.',
+                    'max_length' => 'Máximo 50 caracteres.',
+                    'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
+                ],
+                'baja' => [
+                    'required' => 'El campo "baja" es obligatorio.',
+                    'max_length' => 'El estado de "baja" debe ser un número válido.',
+                ],
+                'id_perfil' => [
+                    'required' => 'Debe seleccionar un perfil.',
+                    'integer' => 'El perfil debe ser un número válido.',
+                ],
+            ]
+        );
 
 
         if (!$validation->withRequest($request)->run()) {
             return redirect()->back()->withInput()->with('validation', $validation->getErrors());
         }
 
-        $model = new usuarios_model();
+        $model = new Usuarios_model();
         $model->insert([
             'nombre' => $request->getPost('nombre'),
             'apellido' => $request->getPost('apellido'),
@@ -89,13 +98,13 @@ class Usuarios_controller extends BaseController
         ]);
 
         return redirect()->to('/usuarios')->with('mensaje', 'Usuario creado correctamente');
-
     }
 
-    public function editar_usuario($id) {
-        $model = new usuarios_model();
+    public function editar_usuario($id)
+    {
+        $model = new Usuarios_model();
         $perfiles_model = new perfiles_model();
-        
+
         $data['usuario'] = $model->find($id);
         $data['perfiles'] = $perfiles_model->findAll();
 
@@ -104,55 +113,82 @@ class Usuarios_controller extends BaseController
             . view('Admin/Usuarios/editar_usuario', $data);
     }
 
-    public function actualizar_usuario($id) {
-    $request = $this->request;
-    $model = new usuarios_model();
-    $usuario_actual = $model->find($id);
+    public function actualizar_usuario($id)
+    {
+        $request = $this->request;
+        $model = new Usuarios_model();
+        $usuario_actual = $model->find($id);
 
-    $rules = [
-        'nombre' => 'required|max_length[30]',
-        'apellido' => 'required|max_length[30]',
-        'telefono' => 'required|integer',
-        'id_perfil' => 'required|integer',
-        'baja' => 'required|max_length[2]'
-    ];
+        $rules = [
+            'nombre' => 'required|max_length[30]',
+            'apellido' => 'required|max_length[30]',
+            'telefono' => 'required|integer',
+            'id_perfil' => 'required|integer',
+            'baja' => 'required|integer'
+        ];
 
-    if ($request->getPost('email') !== $usuario_actual['email']) {
-        $rules['email'] = 'required|valid_email|max_length[20]|is_unique[usuarios.email]';
-    } else {
-        $rules['email'] = 'required|valid_email|max_length[20]';
+        if ($request->getPost('email') !== $usuario_actual['email']) {
+            $rules['email'] = 'required|valid_email|max_length[20]|is_unique[usuarios.email]';
+        } else {
+            $rules['email'] = 'required|valid_email|max_length[20]';
+        }
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
+        }
+
+        $data = [
+            'nombre' => $request->getPost('nombre'),
+            'apellido' => $request->getPost('apellido'),
+            'email' => $request->getPost('email'),
+            'telefono' => $request->getPost('telefono'),
+            'id_perfil' => $request->getPost('id_perfil'),
+            'baja' => $request->getPost('baja')
+        ];
+
+        if (!empty($request->getPost('pass'))) {
+            $data['pass'] = password_hash($request->getPost('pass'), PASSWORD_BCRYPT);
+        }
+
+        $model->update($id, $data);
+
+        return redirect()->to('/lista_usuarios')->with('mensaje', 'Usuario actualizado correctamente');
     }
 
-    if (!empty($request->getPost('pass'))) {
-        $rules['pass'] = 'max_length[50]|min_length[6]';
+    public function eliminar_usuario($id)
+    {
+        $model = new Usuarios_model();
+
+        try {
+            $model->delete($id);
+            return redirect()->to('/lista_usuarios')->with('mensaje', 'Usuario eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->to('/lista_usuarios')->with('error', 'No se puede eliminar el usuario porque tiene registros relacionados.');
+        }
     }
 
-    if (!$this->validate($rules)) {
-        return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
-    }
+    public function perfil_view()
+    {
+        $usuarioModel = new Usuarios_model();
+        $ventasModel = new \App\Models\Ventas_model();
 
-    $data = [
-        'nombre' => $request->getPost('nombre'),
-        'apellido' => $request->getPost('apellido'),
-        'email' => $request->getPost('email'),
-        'telefono' => $request->getPost('telefono'),
-        'id_perfil' => $request->getPost('id_perfil'),
-        'baja' => $request->getPost('baja')
-    ];
+        $idUsuario = session()->get('id');
 
-    if (!empty($request->getPost('pass'))) {
-        $data['pass'] = password_hash($request->getPost('pass'), PASSWORD_BCRYPT);
-    }
+        $usuario = $usuarioModel->find($idUsuario);
 
-    $model->update($id, $data);
+        if (!$usuario) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuario no encontrado');
+        }
 
-    return redirect()->to('/usuarios')->with('mensaje', 'Usuario actualizado correctamente');
-    }
+        $ventas = $ventasModel->obtenerVentasConDetalles($idUsuario);
 
-    public function eliminar_usuario($id) {
-        $model = new usuarios_model();
-        $model->delete($id);
+        $data = [
+            'usuario' => $usuario,
+            'ventas' => $ventas
+        ];
 
-        return redirect()->to('/usuarios')->with('mensaje', 'Usuario eliminado correctamente');
+        return view('Plantillas/header_view')
+            . view('Plantillas/nav_view')
+            . view('Contenidos/perfil', $data);
     }
 }

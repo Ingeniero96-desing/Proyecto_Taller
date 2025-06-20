@@ -13,10 +13,10 @@ class perfiles_model extends Model
     protected $useAutoIncrement = true;
 
     protected $returnType = 'array';
-    protected $useSoftDeletes = 'false';
+    protected $useSoftDeletes = false;
 
     protected $allowedFields = ['descripcion'];
 
-    protected bool $allowEmptyInserts = false; // esto impide que se inserten registros vacios.
-    protected bool $updateOnlyChanged = true; // esto permite que solo se actualicen los campos que realmente hayan cambiado.
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
 }

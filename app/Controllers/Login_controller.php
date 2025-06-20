@@ -11,8 +11,8 @@ class Login_controller extends BaseController
     {
 
         return view('Plantillas/header_view')
-            . view('Views/Contenidos/login')
-            . view('Plantillas/footer_view');
+            . view('Plantillas/nav_view')
+            . view('Views/Contenidos/login');
     }
 
     public function loguear()
@@ -22,17 +22,17 @@ class Login_controller extends BaseController
         $validation = \Config\Services::validation();
         // Asegurarse de que la solicitud sea POST
         if (!$this->request->is('post')) {
-    
+
             return redirect()->to('/login')->with('error', 'Método no permitido.');
         }
-      
+
 
         // Obtener los datos del formulario
         $email = $this->request->getPost('email');
         $pass = $this->request->getPost('pass');
 
         // Validación
-       
+
         $validation->setRules([
             'email' => 'required|valid_email|max_length[30]',
             'pass'  => 'required|min_length[6]',
@@ -47,15 +47,13 @@ class Login_controller extends BaseController
                 'min_length' => 'La contraseña debe tener al menos 6 caracteres.',
             ]
         ]);
-         
-        if (!$validation->withRequest($request)->run()) {
-            
-            $data ['validation'] = $validation->getErrors();
-            return view('Plantillas/header_view', $data).view('Views/Contenidos/login');
 
-            
+        if (!$validation->withRequest($request)->run()) {
+
+            $data['validation'] = $validation->getErrors();
+            return view('Plantillas/header_view', $data) . view('Views/Contenidos/login');
         }
-         
+
         // Verificación de credenciales en la base de datos
         $userModel = new Usuarios_model();
         $usuario = $userModel->where('email', $email)->first();
@@ -63,27 +61,27 @@ class Login_controller extends BaseController
         if (!$usuario || !password_verify($pass, $usuario['pass'])) {
             return redirect()->route('login')->with('error', 'Credenciales incorrectas.');
         }
+        if ($usuario['baja'] == '1') {
+            return redirect()->route('login')->with('error', 'Tu cuenta está inactiva. Contacta con el administrador.');
+        }
 
         // Crear sesión
         $session = session();
         $session->set([
             'id'       => $usuario['id'],
             'nombre'   => $usuario['nombre'],
+            'apellido' => $usuario['apellido'],
             'email'    => $usuario['email'],
+            'telefono' => $usuario['telefono'],
             'id_perfil' => $usuario['id_perfil'],
             'logueado' => true,
         ]);
 
         // Redireccionar según rol
         if ($usuario['id_perfil'] == 1) {
-            return view('Plantillas/header_view')
-                . view('Plantillas/nav_admin')
-                . view('Admin/panelAdmin');
+            return redirect()->route('panelAdmin');
         } else {
-            return view('Plantillas/header_view')
-                . view('Plantillas/nav_cliente')
-                . view('Contenidos/principal')
-                . view('Plantillas/footer_view');
+            return redirect()->route('principal');
         }
     }
 
@@ -93,6 +91,6 @@ class Login_controller extends BaseController
         $session = session();
         $session->destroy(); //Elimina todos los datos de la sesion
 
-        return redirect()->to('/login'); 
+        return redirect()->to('/login');
     }
 }

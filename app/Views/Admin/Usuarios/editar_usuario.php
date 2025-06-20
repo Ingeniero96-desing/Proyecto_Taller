@@ -1,22 +1,59 @@
-<h2>Editar Usuario</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Editar Usuario</h2>
 
-<form action="<?= base_url('/usuarios/actualizar/'.$usuario['id']) ?>" method="post">
-    <label>Nombre: <input type="text" name="nombre" value="<?= esc($usuario['nombre']) ?>"></label><br>
-    <label>Apellido: <input type="text" name="apellido" value="<?= esc($usuario['apellido']) ?>"></label><br>
-    <label>Email: <input type="email" name="email" value="<?= esc($usuario['email']) ?>"></label><br>
-    <label>Teléfono: <input type="text" name="telefono" value="<?= esc($usuario['telefono']) ?>"></label><br>
-    <label>Contraseña (solo si deseas cambiarla): <input type="password" name="pass"></label><br>
-    <label>Baja: <input type="text" name="baja" value="<?= esc($usuario['baja']) ?>"></label><br>
-    <label>Perfil:
-        <select name="id_perfil">
-            <?php foreach($perfiles as $perfil): ?>
-                <option value="<?= $perfil['id'] ?>" <?= $perfil['id'] == $usuario['id_perfil'] ? 'selected' : '' ?>>
-                    <?= esc($perfil['nombre']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </label><br>
-    <button type="submit">Actualizar</button>
-</form>
-</body>
-</html>
+    <?php if (session()->getFlashdata('validation')): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach (session()->getFlashdata('validation') as $error): ?>
+                    <li><?= esc($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <form action="<?= base_url('actualizar_usuario/' . $usuario['id']) ?>" method="post">
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" value="<?= esc($usuario['nombre']) ?>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Apellido</label>
+            <input type="text" name="apellido" class="form-control" value="<?= esc($usuario['apellido']) ?>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="<?= esc($usuario['email']) ?>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" name="telefono" class="form-control" value="<?= esc($usuario['telefono']) ?>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Baja</label>
+            <select name="baja" class="form-select">
+                <option value="0" <?= $usuario['baja'] == '0' ? 'selected' : '' ?>>Activo</option>
+                <option value="1" <?= $usuario['baja'] == '1' ? 'selected' : '' ?>>Inactivo</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Perfil</label>
+            <select name="id_perfil" class="form-select">
+                <?php foreach ($perfiles as $perfil): ?>
+                    <?php if (isset($perfil['id_perfiles'], $perfil['descripcion'])): ?>
+                        <option value="<?= esc($perfil['id_perfiles']) ?>" <?= $perfil['id_perfiles'] == $usuario['id_perfil'] ? 'selected' : '' ?>>
+                            <?= esc($perfil['descripcion']) ?>
+                        </option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="<?= base_url('/lista_usuarios') ?>" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

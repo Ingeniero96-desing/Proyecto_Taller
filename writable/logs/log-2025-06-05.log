@@ -1,0 +1,563 @@
+DEBUG - 2025-06-05 13:46:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:46:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:46:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:46:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:46:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:47:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:47:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:51:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:51:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:52:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 13:59:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-05 13:59:51 --> Error: Class "CondeIgniter\Model" not found
+[Method: GET, Route: consultas]
+in APPPATH\Models\consultas_model.php on line 7.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(316): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\proyecto_taller\\app\\Models\\consultas_model.php')
+ 3 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\consultas_model')
+ 4 APPPATH\Controllers\Consulta_controller.php(12): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\consultas_model')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->lista_consultas()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-06-05 14:00:28 --> mysqli_sql_exception: Unknown column 'consultas.deleted_at' in 'where clause' in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `consult...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `consult...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `consult...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `consult...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(18): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->lista_consultas()
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-06-05 14:00:28 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'consultas.deleted_at' in 'where clause'
+[Method: GET, Route: consultas]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC', [], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Consulta_controller.php(18): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->lista_consultas()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:00:28 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'consultas.deleted_at' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC', [], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Consulta_controller.php(18): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->lista_consultas()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:00:28 --> [Caused by] mysqli_sql_exception: Unknown column 'consultas.deleted_at' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `consultas`.*, `usuarios`.`nombre`, `usuarios`.`apellido`
+FROM `consultas`
+LEFT JOIN `usuarios` ON `usuarios`.`id` = `consultas`.`id_usuarios`
+WHERE `consultas`.`deleted_at` IS NULL
+ORDER BY `id_mensaje` DESC', [], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Consulta_controller.php(18): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->lista_consultas()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:01:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:02:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:02:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:02:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:03:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:03:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:03:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:03:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:04:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:04:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:04:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:04:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:04:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:08:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:08:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:08:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:08:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:09:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:09:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-05 14:09:44 --> CodeIgniter\Database\Exceptions\DataException: There is no data to insert.
+[Method: POST, Route: crear]
+in SYSTEMPATH\BaseModel.php on line 825.
+ 1 SYSTEMPATH\BaseModel.php(825): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:17:30 --> CodeIgniter\Database\Exceptions\DataException: There is no data to insert.
+[Method: POST, Route: crear]
+in SYSTEMPATH\BaseModel.php on line 825.
+ 1 SYSTEMPATH\BaseModel.php(825): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-05 14:17:35 --> CodeIgniter\Database\Exceptions\DataException: There is no data to insert.
+[Method: POST, Route: crear]
+in SYSTEMPATH\BaseModel.php on line 825.
+ 1 SYSTEMPATH\BaseModel.php(825): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:22:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-06-05 14:22:53 --> CodeIgniter\Database\Exceptions\DataException: There is no data to insert.
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\BaseModel.php on line 825.
+ 1 SYSTEMPATH\BaseModel.php(825): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([], true)
+ 3 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-06-05 14:30:08 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`)) in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `co...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\proyecto_taller\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#10 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-06-05 14:30:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`))
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:30:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:30:08 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Consulta_controller.php(70): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-06-05 14:32:50 --> mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`)) in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `co...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\proyecto_taller\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#10 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-06-05 14:32:50 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`))
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:32:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:32:50 --> [Caused by] mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`bd_franco_diaz`.`consultas`, CONSTRAINT `FK_id_usuarios` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-06-05 14:33:30 --> mysqli_sql_exception: Column 'id_usuarios' cannot be null in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `co...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\proyecto_taller\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#10 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-06-05 14:33:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:33:30 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:33:30 --> [Caused by] mysqli_sql_exception: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Consulta_controller.php(71): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:37:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-06-05 14:37:26 --> mysqli_sql_exception: Column 'id_usuarios' cannot be null in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `co...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\proyecto_taller\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#10 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-06-05 14:37:26 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:37:26 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:37:26 --> [Caused by] mysqli_sql_exception: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:37:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:37:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:37:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-06-05 14:37:32 --> mysqli_sql_exception: Column 'id_usuarios' cannot be null in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `co...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\proyecto_taller\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#10 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-06-05 14:37:32 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:37:32 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:37:32 --> [Caused by] mysqli_sql_exception: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:41:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-06-05 14:41:47 --> mysqli_sql_exception: Column 'id_usuarios' cannot be null in C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\proyecto_taller\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `co...', 0)
+#1 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 C:\xampp\htdocs\proyecto_taller\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 C:\xampp\htdocs\proyecto_taller\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 C:\xampp\htdocs\proyecto_taller\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\proyecto_taller\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\proyecto_taller\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\proyecto_taller\app\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+#9 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+#10 C:\xampp\htdocs\proyecto_taller\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\proyecto_taller\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\proyecto_taller\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\proyecto_taller\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-06-05 14:41:47 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+[Method: POST, Route: crearConsulta]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:41:47 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-06-05 14:41:47 --> [Caused by] mysqli_sql_exception: Column 'id_usuarios' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (\'Franco Diaz\', \'franco13@gmail.com\', \'consulta\', \'PRIMER CONSULTA: SDSDFSDFKSDCSDNFKSNFKNOENNWEQEMQWLDKMQQLKMWQDLDMQWDLKQDQWNDLKWQNDJQWDNQWDNQWIDASLDKASNDLK\', NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `consultas` (`nombre_mensaje`, `correo_mensaje`, `asunto_mensaje`, `consulta_mensaje`, `id_usuarios`) VALUES (:nombre_mensaje:, :correo_mensaje:, :asunto_mensaje:, :consulta_mensaje:, :id_usuarios:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\Consulta_controller.php(72): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Consulta_controller->crear_consulta()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Consulta_controller))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-06-05 14:50:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:50:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-06-05 14:50:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

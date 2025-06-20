@@ -12,17 +12,36 @@
 
 .nav-link {
     position: relative;
-    margin-top: 10px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 15px;
-    font-weight: 100;
-    color: rgb(15, 15, 15);
     text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease, padding 0.3s ease;
+    color: rgb(15, 15, 15);
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    border-radius: 2px;
+    display: block;
+    transition: width 0.4s ease, left 0.4s ease;
 }
 
 .nav-link:hover {
     color: rgb(255, 255, 255);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-link.active {
+    color: white;
 }
 
 .redes-icono {

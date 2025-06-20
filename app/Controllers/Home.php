@@ -2,14 +2,36 @@
 
 namespace App\Controllers;
 
+use App\Models\Productos_model;
+use App\Models\Categorias_model;
+
 class Home extends BaseController
 {
-    public function index(): string
+        public function index()
     {
-        return view('/Plantillas/header_view')
-            . view('/Plantillas/nav_view')
-            . view('/Contenidos/principal')
-            . view('/Plantillas/footer_view');
+        $productoModel = new Productos_model();
+
+        $productos = $productoModel
+            ->select('productos.*, categorias.nombre_categoria')
+            ->join('categorias', 'categorias.id_cate = productos.id_categoria')
+            ->findAll();
+
+        $productosPorCategoria = [];
+
+        foreach ($productos as $producto) {
+            $cat = $producto['nombre_categoria'];
+            if (!isset($productosPorCategoria[$cat])) {
+                $productosPorCategoria[$cat] = [];
+            }
+            $productosPorCategoria[$cat][] = $producto;
+        }
+
+        $data['productosPorCategoria'] = $productosPorCategoria;
+
+        return view('Plantillas/header_view')
+            . view('Plantillas/nav_view')
+            . view('Contenidos/principal', $data)
+            . view('Plantillas/footer_view');
     }
 
     public function comercializacion()
@@ -63,6 +85,7 @@ class Home extends BaseController
     }
 
         return view('Plantillas/header_view')
+            . view('Plantillas/nav_view')
             . view('/Admin/panelAdmin');
     }
 }

@@ -1,5 +1,8 @@
 <div class="container mt-5">
-    <h2>Lista de Perfiles</h2>
+    <h2 class="mb-4 seccion-titulo">
+    <i class="bi bi-people-fill me-2"></i>Lista de Perfiles
+    </h2>
+
     <a href="<?= base_url('/perfiles/crear') ?>" class="btn btn-primary mb-3">Agregar Perfil</a>
 
     <?php if (session()->getFlashdata('mensaje')): ?>
