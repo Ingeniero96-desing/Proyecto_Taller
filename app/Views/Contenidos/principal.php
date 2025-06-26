@@ -80,7 +80,7 @@
                   </div>
 
                   <div class="cards-container">
-                      <?php foreach (array_slice($productos, 0, 4) as $producto): ?>
+                      <?php foreach (array_slice(array_filter($productos, fn($p) => $p['estado_producto'] != 1), 0, 4) as $producto): ?>
                           <div class="card custom-card">
                               <div class="img-container">
                                   <img src="<?= base_url('assets/uploads/' . $producto['imagen_producto']) ?>" class="card-img-top" alt="<?= esc($producto['nombre_producto']) ?>">
@@ -88,26 +88,44 @@
                               <div class="card-body">
                                   <h5 class="card-title"><?= esc($producto['nombre_producto']) ?></h5>
                                   <p class="card-text"><?= esc($producto['descripcion_producto']) ?></p>
-                                  <?php if (session()->get('logueado')): ?>
-                                      <form action="<?= base_url('carrito/agregar') ?>" method="post">
-                                          <input type="hidden" name="id_productos" value="<?= esc($producto['id_producto']) ?>">
-                                          <input type="hidden" name="nombre_producto" value="<?= esc($producto['nombre_producto']) ?>">
-                                          <input type="hidden" name="precio_producto" value="<?= esc($producto['precio_producto']) ?>">
-                                          <input type="hidden" name="descripcion_producto" value="<?= esc($producto['descripcion_producto']) ?>">
-                                          <input type="hidden" name="imagen_producto" value="<?= esc($producto['imagen_producto']) ?>">
 
-                                          <div class="d-flex justify-content-center align-items-center">
-                                              <button type="submit" class="btn btn-success">Agregar al carrito 🛒</button>
-                                          </div>
-                                      </form>
-                                  <?php else: ?>
-                                      <div class="d-flex justify-content-center align-items-center">
-                                          <a href="<?= base_url('login') ?>" class="btn btn-warning">Inicia sesión para comprar 🛒</a>
+                                  <!-- Precio -->
+                                  <p class="card-text fw-bold text-primary">Precio: $<?= esc($producto['precio_producto']) ?></p>
+
+                                  <!-- Stock -->
+                                  <p class="card-text text-muted">Stock disponible: <?= esc($producto['stock_producto']) ?></p>
+
+                                  <?php if ($producto['stock_producto'] == '0'): ?>
+                                      <div class="d-flex justify-content-center align-items-center mt-2">
+                                          <span class="badge bg-secondary d-flex align-items-center justify-content-center p-2" style="width: 100px; height: 35px">Sin stock</span>
                                       </div>
+                                  <?php else: ?>
+                                      <?php if (session()->get('logueado')): ?>
+                                          <form action="<?= base_url('carrito/agregar') ?>" method="post">
+                                              <input type="hidden" name="id_productos" value="<?= esc($producto['id_producto']) ?>">
+                                              <input type="hidden" name="nombre_producto" value="<?= esc($producto['nombre_producto']) ?>">
+                                              <input type="hidden" name="precio_producto" value="<?= esc($producto['precio_producto']) ?>">
+                                              <input type="hidden" name="descripcion_producto" value="<?= esc($producto['descripcion_producto']) ?>">
+                                              <input type="hidden" name="imagen_producto" value="<?= esc($producto['imagen_producto']) ?>">
+                                              <div class="d-flex justify-content-center align-items-center">
+                                                  <button type="submit" class="btn btn-success">Agregar al carrito 🛒</button>
+                                              </div>
+                                          </form>
+                                      <?php else: ?>
+                                          <div class="d-flex justify-content-center align-items-center">
+                                              <a href="<?= base_url('login') ?>" class="btn btn-warning">Inicia sesión para comprar 🛒</a>
+                                          </div>
+                                      <?php endif; ?>
                                   <?php endif; ?>
                               </div>
                           </div>
                       <?php endforeach; ?>
+                  </div>
+
+                  <div class="d-flex justify-content-center align-items-center">
+                      <a href="<?= base_url('catalogo') ?>">
+                          <button type="submit" class="btn btn-secondary fw-semibold" style="width: 200px; height: 45px">Ver catálogo</button>
+                      </a>
                   </div>
 
                   <hr class="lineas-separadoras">

@@ -72,7 +72,7 @@ class Usuarios_controller extends BaseController
                 ],
                 'baja' => [
                     'required' => 'El campo "baja" es obligatorio.',
-                    'max_length' => 'El estado de "baja" debe ser un número válido.',
+                    'integer' => 'El estado de "baja" debe ser un número válido.',
                 ],
                 'id_perfil' => [
                     'required' => 'Debe seleccionar un perfil.',

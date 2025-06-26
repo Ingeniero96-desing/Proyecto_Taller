@@ -25,26 +25,51 @@ class Carrito_controller extends BaseController
     public function agregar_producto()
     {
         if (!session()->get('logueado')) {
-            return redirect()->to('/login')->with('error', 'Debes iniciar sesion para agregar productos al carrito.');
+            return redirect()->to('/login')->with('error', 'Debes iniciar sesión para agregar productos al carrito.');
         }
 
         $cart = \Config\Services::cart();
         $request = \Config\Services::request();
+        $producto_model = new \App\Models\Productos_model();
 
-        $data = array(
-            'id'      => $request->getPost('id_productos'),
+        $id_producto = $request->getPost('id_productos');
+
+        // Obtener producto desde la base de datos
+        $producto = $producto_model->find($id_producto);
+
+        if (!$producto) {
+            return redirect()->to('catalogo')->with('error', 'Producto no encontrado.');
+        }
+
+        $stock_disponible = $producto['stock_producto'];
+        $cantidad_en_carrito = 0;
+
+        // Verificar cuántas unidades ya hay en el carrito
+        foreach ($cart->contents() as $item) {
+            if ($item['id'] == $id_producto) {
+                $cantidad_en_carrito += $item['qty'];
+            }
+        }
+
+        if ($cantidad_en_carrito >= $stock_disponible) {
+            return redirect()->to('carrito')->with('error', 'No hay suficiente stock disponible para "' . $producto['nombre_producto'] . '".');
+        }
+
+        // Insertar el producto al carrito
+        $data = [
+            'id'      => $producto['id_producto'],
             'qty'     => 1,
-            'price'   => $request->getPost('precio_producto'),
-            'name'    => $request->getPost('nombre_producto'),
+            'price'   => $producto['precio_producto'],
+            'name'    => $producto['nombre_producto'],
             'options' => [
-                'descripcion' => $request->getPost('descripcion_producto'),
-                'imagen'      => $request->getPost('imagen_producto'),
+                'descripcion' => $producto['descripcion_producto'],
+                'imagen'      => $producto['imagen_producto'],
             ]
-        );
+        ];
 
         $cart->insert($data);
 
-        return redirect()->to('carrito');
+        return redirect()->to('carrito')->with('success', 'Producto agregado al carrito.');
     }
 
     public function vaciar_carrito($all = null)
@@ -87,45 +112,37 @@ class Carrito_controller extends BaseController
             }
         }
 
-        // Si no se encuentra el artículo, redirigir con un error
         if (!$item) {
-            session()->setFlashdata('error', 'Articulo no encontrado en el carrito');
+            session()->setFlashdata('error', 'Artículo no encontrado en el carrito.');
             return redirect()->to('carrito');
         }
 
-        // Obtener la cantidad actual del artículo
         $cantidad = $item['qty'];
 
-        // Modificar la cantidad según el parámetro
         if ($modif == 'mas') {
             $id = $item['id'];
-
-
             $producto = $producto_model->where('id_producto', $id)->first();
 
             if ($cantidad >= $producto['stock_producto']) {
-                return redirect('carrito');
+                session()->setFlashdata('error', 'No hay más stock disponible para "' . $item['name'] . '".');
             } else {
                 $cantidad++;
+                $cart->update([
+                    'rowid' => $rowid,
+                    'qty' => $cantidad
+                ]);
             }
         } elseif ($modif == 'menos') {
-            $cantidad--;
+            // Solo actualiza si hay más de 1
+            if ($cantidad > 1) {
+                $cantidad--;
+                $cart->update([
+                    'rowid' => $rowid,
+                    'qty' => $cantidad
+                ]);
+            }
         }
 
-        // Actualizar o eliminar el artículo del carrito
-        if ($cantidad > 0) {
-            $data = array(
-                'rowid' => $rowid,
-                'qty' => $cantidad
-            );
-
-            $cart->update($data);
-        } else {
-            // Si la cantidad es 0 o menor, elimina el artículo del carrito
-            $cart->remove($rowid);
-        }
-
-        // Redirigir al carrito
         return redirect()->to('carrito');
     }
 

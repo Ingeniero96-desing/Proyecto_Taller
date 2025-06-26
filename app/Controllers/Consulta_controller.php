@@ -15,6 +15,7 @@ class Consulta_controller extends BaseController
         $data['consultas'] = $consultas_model
             ->select('consultas.*, usuarios.nombre, usuarios.apellido')
             ->join('usuarios', 'usuarios.id = consultas.id_usuarios', 'left')
+            ->where('leido_mensaje', 0)
             ->orderBy('id_mensaje', 'DESC')
             ->findAll();
 
@@ -52,7 +53,7 @@ class Consulta_controller extends BaseController
                 ],
 
                 'consulta_mensaje' => [
-                    'required' => 'La consulta es requerido.',
+                    'required' => 'La consulta es requerida.',
                     'min_length' => 'La consulta debe tener como mínimo 10 caracteres.',
                     'max_length' => 'La consulta debe tener como máximo 250 caracteres.',
                 ],
@@ -79,13 +80,7 @@ class Consulta_controller extends BaseController
 
             return redirect()->route('informacion_de_contactos')->with('mensaje', 'Su consulta se envió exitosamente!');
         } else {
-
-            $data['titulo'] = 'Contacto';
-            $data['validation'] = $validation->getErrors();
-            return view('Plantillas/header_view')
-                . view('Plantillas/nav_view')
-                . view('Contenidos/informacion_de_contactos', $data)
-                . view('Plantillas/footer_view');
+            return redirect()->back()->withInput()->with('validation', $validation->getErrors());
         }
     }
 
@@ -207,9 +202,6 @@ class Consulta_controller extends BaseController
         return redirect()->to('/consultas')->with('mensaje', 'Consulta actualizada correctamente');
     }
 
-
-
-
     public function eliminar_consulta($id)
     {
         $consultas_model = new consultas_model();
@@ -223,5 +215,38 @@ class Consulta_controller extends BaseController
         $consultas_model->delete($id);
 
         return redirect()->to('/consultas')->with('mensaje', 'Consulta eliminada correctamente');
+    }
+
+    // Marcar consulta como leída
+    public function marcar_leido($id)
+    {
+        $consultas_model = new consultas_model();
+
+        $consulta = $consultas_model->find($id);
+
+        if (!$consulta) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Consulta no encontrada');
+        }
+
+        $consultas_model->update($id, ['leido_mensaje' => 1]);
+
+        return redirect()->to('/consultas')->with('mensaje', 'Consulta marcada como leída.');
+    }
+
+    // Mostrar lista de consultas leídas
+    public function consultas_leidas()
+    {
+        $consultas_model = new consultas_model();
+
+        $data['consultas_leidas'] = $consultas_model
+            ->select('consultas.*, usuarios.nombre, usuarios.apellido')
+            ->join('usuarios', 'usuarios.id = consultas.id_usuarios', 'left')
+            ->where('leido_mensaje', 1)
+            ->orderBy('id_mensaje', 'DESC')
+            ->findAll();
+
+        return view('Plantillas/header_view')
+            . view('Plantillas/nav_view')
+            . view('Admin/Consultas/consultas_leidas', $data); // asegurate de tener esta vista
     }
 }

@@ -35,7 +35,7 @@
             <!-- Botones perfil y logout -->
             <div class="d-flex flex-column flex-lg-row align-items-center gap-2">
                 <a href="<?= base_url('perfil') ?>">
-                    <button type="button" class="btn btn-primary btn-sm btn-lg custom-btn w-100 w-lg-auto">
+                    <button type="button" class="btn btn-primary btn-sm btn-lg custom-btn w-100 w-lg-auto" style="font-weight: 600;">
                         <?= session()->get('nombre') ?>
                     </button>
                 </a>

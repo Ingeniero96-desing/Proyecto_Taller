@@ -16,7 +16,7 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
             <thead class="table-primary">
-                <tr>
+                <tr class="text-center">
                     <th>ID</th>
                     <th>Imagen</th>
                     <th>Nombre</th>
@@ -24,13 +24,14 @@
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Categoría</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($productos)) : ?>
                     <?php foreach ($productos as $producto) : ?>
-                        <tr>
+                        <tr class="text-center">
                             <td><?= esc($producto['id_producto']) ?></td>
                             <td>
                                 <?php if ($producto['imagen_producto']): ?>
@@ -44,11 +45,11 @@
                             <td>$<?= esc($producto['precio_producto']) ?></td>
                             <td><?= esc($producto['stock_producto']) ?></td>
                             <td><?= esc($producto['nombre_categoria']) ?></td>
-                            <td>
-                                <div class="d-flex gap-2">
-                                    <a href="<?= base_url('editar_producto/' . $producto['id_producto']) ?>" class="btn btn-sm btn-warning">Editar</a>
-                                    <a href="<?= base_url('eliminar_producto/' . $producto['id_producto']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
-                                </div>
+                            <td class="text-center">
+                                <?= $producto['estado_producto'] == '1' ? '<span class="badge bg-danger">Inactivo</span>' : '<span class="badge bg-success">Activo</span>' ?>
+                            </td>
+                            <td class="text-center">
+                                <a href="<?= base_url('editar_producto/' . $producto['id_producto']) ?>" class="btn btn-sm btn-secondary">Editar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

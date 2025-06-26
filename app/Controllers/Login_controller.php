@@ -32,7 +32,7 @@ class Login_controller extends BaseController
         $pass = $this->request->getPost('pass');
 
         // Validación
-
+        helper(['form']);
         $validation->setRules([
             'email' => 'required|valid_email|max_length[30]',
             'pass'  => 'required|min_length[6]',
@@ -51,19 +51,23 @@ class Login_controller extends BaseController
         if (!$validation->withRequest($request)->run()) {
 
             $data['validation'] = $validation->getErrors();
-            return view('Plantillas/header_view', $data) . view('Views/Contenidos/login');
+            return redirect()->back()->withInput()->with('validation', $validation);
         }
 
         // Verificación de credenciales en la base de datos
         $userModel = new Usuarios_model();
         $usuario = $userModel->where('email', $email)->first();
 
-        if (!$usuario || !password_verify($pass, $usuario['pass'])) {
-            return redirect()->route('login')->with('error', 'Credenciales incorrectas.');
+        if (!$usuario) {
+            return redirect()->route('login')->withInput()->with('error', 'Correo electrónico incorrecto.');
+        }
+        if (!password_verify($pass, $usuario['pass'])) {
+            return redirect()->route('login')->withInput()->with('error', 'Contraseña incorrecta.');
         }
         if ($usuario['baja'] == '1') {
-            return redirect()->route('login')->with('error', 'Tu cuenta está inactiva. Contacta con el administrador.');
+            return redirect()->route('login')->withInput()->with('error', 'Tu cuenta está inactiva. Contacta con el administrador.');
         }
+
 
         // Crear sesión
         $session = session();

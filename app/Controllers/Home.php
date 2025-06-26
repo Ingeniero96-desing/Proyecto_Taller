@@ -7,7 +7,7 @@ use App\Models\Categorias_model;
 
 class Home extends BaseController
 {
-        public function index()
+    public function index()
     {
         $productoModel = new Productos_model();
 
@@ -80,12 +80,53 @@ class Home extends BaseController
 
     public function panelAdmin()
     {
-         if (session()->get('id_perfil') != 1) {
+        if (session()->get('id_perfil') != 1) {
             return redirect()->to(base_url('login'));
-    }
+        }
 
         return view('Plantillas/header_view')
             . view('Plantillas/nav_view')
             . view('/Admin/panelAdmin');
+    }
+
+    public function catalogo()
+    {
+        $productoModel = new Productos_model();
+
+        // Obtener el término de búsqueda
+        $busqueda = $this->request->getGet('busqueda');
+
+        // Construir la consulta con join
+        $builder = $productoModel
+            ->select('productos.*, categorias.nombre_categoria')
+            ->join('categorias', 'categorias.id_cate = productos.id_categoria');
+
+        // Si hay búsqueda, filtramos
+        if (!empty($busqueda)) {
+            $builder->groupStart()
+                ->like('productos.nombre_producto', $busqueda)
+                ->orLike('productos.descripcion_producto', $busqueda)
+                ->groupEnd();
+        }
+
+        $productos = $builder->findAll();
+
+        // Agrupar por categoría
+        $productosPorCategoria = [];
+        foreach ($productos as $producto) {
+            $cat = $producto['nombre_categoria'];
+            if (!isset($productosPorCategoria[$cat])) {
+                $productosPorCategoria[$cat] = [];
+            }
+            $productosPorCategoria[$cat][] = $producto;
+        }
+
+        $data['productosPorCategoria'] = $productosPorCategoria;
+        $data['busqueda'] = $busqueda;
+
+        return view('/Plantillas/header_view')
+            . view('/Plantillas/nav_view')
+            . view('/Contenidos/catalogo', $data)
+            . view('/Plantillas/footer_view');
     }
 }

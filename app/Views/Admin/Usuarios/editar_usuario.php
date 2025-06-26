@@ -14,22 +14,22 @@
     <form action="<?= base_url('actualizar_usuario/' . $usuario['id']) ?>" method="post">
         <div class="mb-3">
             <label class="form-label">Nombre</label>
-            <input type="text" name="nombre" class="form-control" value="<?= esc($usuario['nombre']) ?>">
+            <input type="text" name="nombre" class="form-control" value="<?= esc($usuario['nombre']) ?>" readonly>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Apellido</label>
-            <input type="text" name="apellido" class="form-control" value="<?= esc($usuario['apellido']) ?>">
+            <input type="text" name="apellido" class="form-control" value="<?= esc($usuario['apellido']) ?>" readonly>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" value="<?= esc($usuario['email']) ?>">
+            <input type="email" name="email" class="form-control" value="<?= esc($usuario['email']) ?>" readonly>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Teléfono</label>
-            <input type="text" name="telefono" class="form-control" value="<?= esc($usuario['telefono']) ?>">
+            <input type="text" name="telefono" class="form-control" value="<?= esc($usuario['telefono']) ?>" readonly>
         </div>
 
         <div class="mb-3">

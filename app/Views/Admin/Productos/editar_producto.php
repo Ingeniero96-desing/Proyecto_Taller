@@ -46,8 +46,25 @@
         </div>
 
         <div class="mb-3">
-            <label for="imagen_producto" class="form-label">Imagen (URL o nombre de archivo)</label>
-            <input type="file" class="form-control" id="imagen_producto" name="imagen_producto" accept="image/*" value="<?= old('imagen_producto') ?>">
+            <label class="form-label">Estado</label>
+            <select name="estado_producto" class="form-select">
+                <option value="0" <?= $producto['estado_producto'] == '0' ? 'selected' : '' ?>>Activo</option>
+                <option value="1" <?= $producto['estado_producto'] == '1' ? 'selected' : '' ?>>Inactivo</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Imagen actual</label><br>
+            <?php if (!empty($producto['imagen_producto'])): ?>
+                <img src="<?= base_url('assets/uploads/' . $producto['imagen_producto']) ?>" alt="Imagen del producto" style="max-width: 200px;">
+            <?php else: ?>
+                <p>No hay imagen</p>
+            <?php endif; ?>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen_producto" class="form-label">Cambiar Imagen (opcional)</label>
+            <input type="file" class="form-control" id="imagen_producto" name="imagen_producto" accept="image/*">
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar</button>

@@ -26,7 +26,7 @@
                     <a class="nav-link" href="<?= base_url('quienes_somos') ?>">Quiénes somos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('#productos-cliente') ?>">Productos</a>
+                    <a class="nav-link" href="<?= base_url('catalogo') ?>">Productos</a>
                 </li>
             </ul>
 

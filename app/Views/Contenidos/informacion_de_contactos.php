@@ -1,6 +1,6 @@
 <section class="container my-5 contacto-seccion">
     <h2 class="text-center mb-5 seccion-titulo">
-         <i class="bi bi-telephone-fill me-2"></i>Información de Contacto
+        <i class="bi bi-telephone-fill me-2"></i>Información de Contacto
     </h2>
 
     <div class="row g-4 mb-5">
@@ -33,6 +33,7 @@
         </div>
     <?php endif; ?>
 
+    <?php $validation = session('validation'); ?>
     <?php if (!empty($validation)): ?>
         <div class="alert alert-danger">
             <ul>
@@ -49,28 +50,28 @@
         <?= csrf_field() ?>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="nombre_mensaje" id="nombreInput" placeholder="Tu nombre" required>
+            <input type="text" class="form-control" name="nombre_mensaje" id="nombreInput" placeholder="Tu nombre" value="<?= old('nombre_mensaje') ?>">
             <label for="nombreInput">Nombre completo</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" name="correo_mensaje" id="emailInput" placeholder="nombre@ejemplo.com" required>
+            <input type="email" class="form-control" name="correo_mensaje" id="emailInput" placeholder="nombre@ejemplo.com" value="<?= old('correo_mensaje') ?>">
             <label for="emailInput">Correo electrónico</label>
         </div>
 
         <div class="form-floating mb-3">
-            <select class="form-select" name="asunto_mensaje" id="motivoSelect" required>
-                <option selected disabled value="">Seleccioná una opción</option>
-                <option value="consulta">Consulta general</option>
-                <option value="presupuesto">Solicitud de presupuesto</option>
-                <option value="soporte">Soporte técnico</option>
-                <option value="otro">Otro</option>
+            <select class="form-select" name="asunto_mensaje" id="motivoSelect">
+                <option disabled value="">Seleccioná una opción</option>
+                <option value="consulta" <?= old('asunto_mensaje') == 'consulta' ? 'selected' : '' ?>>Consulta general</option>
+                <option value="presupuesto" <?= old('asunto_mensaje') == 'presupuesto' ? 'selected' : '' ?>>Solicitud de presupuesto</option>
+                <option value="soporte" <?= old('asunto_mensaje') == 'soporte' ? 'selected' : '' ?>>Soporte técnico</option>
+                <option value="otro" <?= old('asunto_mensaje') == 'otro' ? 'selected' : '' ?>>Otro</option>
             </select>
             <label for="motivoSelect">Motivo de contacto</label>
         </div>
 
         <div class="form-floating mb-4">
-            <textarea class="form-control" name="consulta_mensaje" id="mensajeTextarea" placeholder="Escribí tu mensaje acá" style="height: 150px" required></textarea>
+            <textarea class="form-control" name="consulta_mensaje" id="mensajeTextarea" placeholder="Escribí tu mensaje acá" style="height: 150px"><?= old('consulta_mensaje') ?></textarea>
             <label for="mensajeTextarea">Mensaje</label>
         </div>
 

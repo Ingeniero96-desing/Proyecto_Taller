@@ -17,7 +17,7 @@ $items = $cart->contents();
 
 <div class="container mt-5">
     <h2 class="mb-5 seccion-titulo text-center">
-    <i class="bi bi-cart-fill me-2"></i><?= esc($titulo) ?>
+        <i class="bi bi-cart-fill me-2"></i><?= esc($titulo) ?>
     </h2>
 
 
@@ -63,7 +63,7 @@ $items = $cart->contents();
                     </tr>
 
                     <div class="mt-3">
-                        <a href="<?= base_url('#productos-cliente') ?>" class="btn btn-outline-primary fw-semibold">
+                        <a href="<?= base_url('catalogo') ?>" class="btn btn-outline-primary fw-semibold">
                             ➕ Agregar producto
                         </a>
                     </div>
@@ -82,7 +82,7 @@ $items = $cart->contents();
         </div>
 
         <div class="mt-3">
-            <a href="<?= base_url('#productos-cliente') ?>" class="btn btn-outline-primary fw-semibold">
+            <a href="<?= base_url('catalogo') ?>" class="btn btn-outline-primary fw-semibold">
                 ➕ Agregar otro producto
             </a>
         </div>

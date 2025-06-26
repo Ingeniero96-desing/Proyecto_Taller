@@ -1,20 +1,14 @@
 <div class="d-flex justify-content-center align-items-center vh-100 fondo-principal">
     <div class="bg-white p-5 rounded-5 text-secondary shadow login-container" style="width: 25rem;">
 
-         
-        <?php if (!empty($validation)): ?>
+        <?php if (session('validation')): ?>
             <div class="alert alert-danger">
-                <ul>
-                    <?php foreach ($validation as $error): ?>
-                        <li><?= esc($error) ?></li>
-                    <?php endforeach; ?>
-                </ul>
+                <?php foreach (session('validation')->getErrors() as $error): ?>
+                    <p><?= esc($error) ?></p>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
-        <?php if(session('error')){
-            echo session('error');
-        } ?>
-                           
+
         <form action="<?= base_url('loguear') ?>" method="post">
 
             <!-- Icono de login centrado -->
@@ -25,6 +19,20 @@
             <!-- Título del formulario -->
             <div class="text-center fs-1 fw-semibold">Iniciar sesión</div>
 
+            <!-- mensaje de errores -->
+            <?php if (session('error')): ?>
+                <div class="alert alert-danger">
+                    <?= esc(session('error')) ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- mensaje de exito -->
+            <?php if (session()->getFlashdata('mensaje')): ?>
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('mensaje') ?>
+                </div>
+            <?php endif; ?>
+
             <!-- Campo email: debe coincidir con el nombre esperado en $request->getPost('email') en el controlador -->
             <div class="input-group mt-4">
                 <span class="input-group-text">
@@ -34,15 +42,10 @@
                     class="form-control bg-light"
                     type="email"
                     name="email"
-                    placeholder="Correo electrónico"
-                    
-                >
+                    value="<?= old('email') ?>"
+                    placeholder="Correo electrónico">
             </div>
-            <?php if (session()->getFlashdata('validation')['email'] ?? false): ?>
-                <div class="text-danger mt-1" style="font-size: 0.9rem;">
-                    <?= session()->getFlashdata('validation')['email'] ?>
-                </div>
-            <?php endif; ?>
+
 
             <!-- Campo contraseña: debe coincidir con el nombre esperado en $request->getPost('pass') -->
             <div class="input-group mt-1">
@@ -53,15 +56,9 @@
                     class="form-control bg-light"
                     type="password"
                     name="pass"
-                    placeholder="Contraseña"
-                    
-                >
+                    placeholder="Contraseña">
             </div>
-            <?php if (session()->getFlashdata('validation')['pass'] ?? false): ?>
-                <div class="text-danger mt-1" style="font-size: 0.9rem;">
-                    <?= session()->getFlashdata('validation')['pass'] ?>
-                </div>
-            <?php endif; ?>
+
 
             <!-- Checkbox "Recuérdame" (puedes manejarlo luego en el controlador para mantener sesión) -->
             <!-- <div class="d-flex justify-content-around mt-1">
@@ -86,7 +83,7 @@
             <!-- Link para registro de nuevos usuarios -->
             <div class="d-flex gap-1 justify-content-center mt-1">
                 <div>¿No tienes una cuenta?</div>
-                <a href="<?= base_url('registrate') ?>" class="text-decoration-none text-info fw-semibold login-links">Regístrate</a>
+                <a href="<?= base_url('registro') ?>" class="text-decoration-none text-info fw-semibold login-links">Regístrate</a>
             </div>
 
             <!-- Separador visual para otros métodos de login -->

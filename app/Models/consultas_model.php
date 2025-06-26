@@ -15,7 +15,7 @@ class consultas_model extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre_mensaje', 'correo_mensaje', 'asunto_mensaje', 'consulta_mensaje', 'id_usuarios'];
+    protected $allowedFields = ['nombre_mensaje', 'correo_mensaje', 'asunto_mensaje', 'consulta_mensaje', 'id_usuarios', 'leido_mensaje'];
 
     protected $validationRules = [];
     protected $validationMessages = [];

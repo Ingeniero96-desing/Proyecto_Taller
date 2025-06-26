@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <h2 class="mb-4 border-bottom seccion-titulo">
-    <i class="bi bi-chat-left-text me-2"></i>Lista de Consultas
+        <i class="bi bi-chat-left-text me-2"></i>Lista de Consultas
     </h2>
 
 
@@ -19,7 +19,7 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover" id="tabla-consultas">
             <thead class="table-primary">
-                <tr>
+                <tr class="text-center">
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Asunto</th>
@@ -31,7 +31,7 @@
             <tbody>
                 <?php if (!empty($consultas)): ?>
                     <?php foreach ($consultas as $consulta): ?>
-                        <tr>
+                        <tr class="text-center">
                             <td><?= esc($consulta['nombre_mensaje']) ?></td>
                             <td><?= esc($consulta['correo_mensaje']) ?></td>
                             <td><?= esc($consulta['asunto_mensaje']) ?></td>
@@ -40,10 +40,7 @@
                             </td>
                             <td><?= esc($consulta['nombre']) . ' ' . esc($consulta['apellido']) ?></td>
                             <td>
-                                <div class="d-flex gap-2">
-
-                                    <a href="<?= base_url('consultas/eliminar/' . $consulta['id_mensaje']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta consulta?')">Eliminar</a>
-                                </div>
+                                <a href="<?= base_url('consultas/marcar_leido/' . $consulta['id_mensaje']) ?>" class="btn btn-sm btn-success">Leído</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -55,6 +52,11 @@
                 <?php endif; ?>
             </tbody>
         </table>
+    </div>
+    <div class="mt-3 text-end">
+        <a href="<?= base_url('consultas_leidas') ?>" class="btn btn-outline-secondary">
+            <i class="bi bi-envelope-open"></i> Consultas Leídas
+        </a>
     </div>
 </div>
 
